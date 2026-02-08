@@ -24,7 +24,7 @@ st.set_page_config(layout="wide", page_title="Dashboard comptable M57")
 # HEADER
 # =====================================================
 
-logo_path = ROOT_DIR / "assets" / "logo.png"
+logo_path = "assets/logo.png"
 st.image(str(logo_path), width=480)
 
 st.title("📊 Tableau de bord comptable – M57")

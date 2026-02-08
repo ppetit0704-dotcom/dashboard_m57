@@ -4,14 +4,14 @@
 
 import streamlit as st
 
-from dashboard_m57.core.loader import load_csv
-from dashboard_m57.core.loader_grand_livre import load_grand_livre
-from dashboard_m57.core.calculs import calculer_sommes_par_chapitre, calcul_autofinancement
+from core.loader import load_csv
+from core.loader_grand_livre import load_grand_livre
+from core.calculs import calculer_sommes_par_chapitre, calcul_autofinancement
 
-from dashboard_m57ui.sidebar import filtres
-from dashboard_m57.ui.cards import afficher_indicateurs, badge
-from dashboard_m57.ui.tables import tableau_chapitres
-from dashboard_m57.ui.graphs import camembert
+from ui.sidebar import filtres
+from ui.cards import afficher_indicateurs, badge
+from ui.tables import tableau_chapitres
+from ui.graphs import camembert
 
 
 # =====================================================

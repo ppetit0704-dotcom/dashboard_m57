@@ -3,8 +3,11 @@
 # =====================================================
 
 import streamlit as st
+from pathlib import Path
 
-from main.core.loader import load_csv
+ROOT_DIR = Path(__file__).parent
+
+from core.loader import load_csv
 from core.loader_grand_livre import load_grand_livre
 from core.calculs import calculer_sommes_par_chapitre, calcul_autofinancement
 

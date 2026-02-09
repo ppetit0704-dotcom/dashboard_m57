@@ -201,5 +201,3 @@ with c5:
 
 with c6:
     badgeGreen("Epargne disponible", auto["Disponibilité"])
-
-    badge("Disponibilité", auto["Disponibilité"])

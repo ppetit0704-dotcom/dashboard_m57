@@ -12,7 +12,7 @@ from core.loader_grand_livre import load_grand_livre
 from core.calculs import calculer_sommes_par_chapitre, calcul_autofinancement
 
 from ui.sidebar import filtres
-from ui.cards import afficher_indicateurs, badge
+from ui.cards import afficher_indicateurs, badge, badgeRed, badgeGreen, badgeBlue
 from ui.tables import tableau_chapitres
 from ui.graphs import camembert
 
@@ -182,19 +182,24 @@ st.subheader("💰 Auto-financement (Budget communal)")
 
 auto = calcul_autofinancement(df)
 
-c1, c2, c3, c4, c5 = st.columns(5)
+c1, c2, c3, c4, c5, c6 = st.columns(6)
 
 with c1:
     badge("Marge brute", auto["Marge brute"])
 
 with c2:
     badge("Épargne brute", auto["Epargne brute"])
-
+    
 with c3:
-    badge("Épargne nette", auto["Epargne nette"])
+    badgeRed("Dont produits exceptionnels", auto["Dont produits exceptionnels"])
 
 with c4:
-    badge("Report N-1", auto["Report N -1"])
+    badgeGreen("Épargne nette", auto["Epargne nette"])
 
 with c5:
+    badgeBlue("Report N-1", auto["Report N -1"])
+
+with c6:
+    badgeGreen("Epargne disponible", auto["Disponibilité"])
+
     badge("Disponibilité", auto["Disponibilité"])

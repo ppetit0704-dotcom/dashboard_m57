@@ -53,7 +53,7 @@ def calcul_autofinancement(df, budget):
     marge = produits - charges
 
     charges_autres = sum(sommes.get(c, 0) for c in ["66","67"])
-    produits_autres = sum(sommes.get(c, 0) for c in ["77"])
+    produits_autres = sum(sommes.get(c, 0) for c in ["76","77"])
 
     epargne_brute = marge - charges_autres + produits_autres
     epargne_nette = epargne_brute - sommes.get("16", 0)
@@ -75,5 +75,6 @@ def calcul_autofinancement(df, budget):
         "Report N -1": f"{report_n1:,.2f} €",
         "Disponibilité": f"{(epargne_nette + report_n1):,.2f} €"
     }
+
 
 

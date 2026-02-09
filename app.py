@@ -263,7 +263,7 @@ st.divider()
 
 st.subheader("💰 Auto-financement (Budget communal)")
 
-auto = calcul_autofinancement(df)
+auto = calcul_autofinancement(df,budget)
 
 c1, c2, c3, c4, c5, c6 = st.columns(6)
 

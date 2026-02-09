@@ -1,19 +1,12 @@
-import sys
-from pathlib import Path
-
-# =====================================================
-# CONFIGURATION DU PATH
-# =====================================================
-
-ROOT_DIR = Path(__file__).resolve().parent
-if str(ROOT_DIR) not in sys.path:
-    sys.path.insert(0, str(ROOT_DIR))
 
 # =====================================================
 # IMPORTS
 # =====================================================
 
 import streamlit as st
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).parent
 
 from core.loader import load_csv
 from core.loader_grand_livre import load_grand_livre

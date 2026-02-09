@@ -35,10 +35,11 @@ def calculer_sommes_par_chapitre(df, annees):
 
 
 
-def calcul_autofinancement(df):
+def calcul_autofinancement(df,budget):
 
     # Ne garder que le budget communal pour le report_n1
-    df_communal = df[df["Libellé_budget"] == "BUDGET COMMUNAL"]  # ou le nom exact dans ton CSV
+    #df_communal = df[df["Libellé_budget"] == "BUDGET COMMUNAL"]  # ou le nom exact dans ton CSV
+    df_communal = df[df["Libellé_budget"] == budget]
 
     # Groupe pour tous les calculs de produits/charges (peut rester sur tout le df)
     grp = df.groupby("Chapitre")
@@ -74,3 +75,4 @@ def calcul_autofinancement(df):
         "Report N -1": f"{report_n1:,.2f} €",
         "Disponibilité": f"{(epargne_nette + report_n1):,.2f} €"
     }
+

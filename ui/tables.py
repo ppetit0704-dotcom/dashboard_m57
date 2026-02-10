@@ -151,6 +151,16 @@ def tableau_chapitres(df, annees, budget, section, sens, df_grand_livre=None):
 
 # --- Détail d'un chapitre ---
 def voir_detail_chapitre(df, budget, section, sens, chapitre, df_grand_livre=None):
+    st.markdown(
+     """
+     <style>
+     color:cyan;
+     background-color:blue;
+     }
+     </style>
+     """,
+     unsafe_allow_html=True
+     )
 
     cols_base = ["Compte", "Total_Prévu", "Réalisé", "Reste_engagé"]
     cols_liquide = [c for c in COLS_LIQUIDE if c in df.columns]
@@ -206,14 +216,17 @@ def voir_detail_chapitre(df, budget, section, sens, chapitre, df_grand_livre=Non
         # Bouton pour écrire
         if df_grand_livre is not None:
             if cols_compte[-1].button(
-                "📝" if not st.session_state.comptes_ouverts.get(compte_key, False) else "📝",
+                "📝",
                 key=f"ecriture_{compte_key}",
                 help="Voir les écritures"
             ):
-                st.session_state.comptes_ouverts[compte_key] = not st.session_state.comptes_ouverts.get(compte_key, False)
-
-            if st.session_state.comptes_ouverts.get(compte_key, False):
-                afficher_ecritures_compte(df_grand_livre, budget, section, sens, compte)
+                dialog_ecritures(
+                    df_grand_livre,
+                    budget,
+                    section,
+                    sens,
+                    compte
+                )
         else:
             cols_compte[-1].write("—")
 
@@ -244,6 +257,35 @@ def voir_detail_chapitre(df, budget, section, sens, chapitre, df_grand_livre=Non
     st.markdown("---")
     st.subheader(f"📊 Répartition des comptes du chapitre {chapitre}")
     camembert_detail(df, budget, section, sens, chapitre)
+
+@st.dialog("📝 Détail des écritures")
+def dialog_ecritures(df_grand_livre, budget, section, sens, compte):
+    
+    st.markdown(
+     """
+     <style>
+     div[data-testid="stDialog"] > div {
+         width: 90vw !important;
+         max-width: 1400px !important;
+     }
+     </style>
+     """,
+     unsafe_allow_html=True
+     )
+
+    container = st.container()
+
+    with container:
+        st.caption(f"{budget} / {section} / {sens}")
+
+        afficher_ecritures_compte(
+            df_grand_livre,
+            budget,
+            section,
+            sens,
+            compte
+        )
+
 
 
 # --- Affichage des écritures d'un compte ---

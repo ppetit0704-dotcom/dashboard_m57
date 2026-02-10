@@ -265,7 +265,7 @@ def dialog_ecritures(df_grand_livre, budget, section, sens, compte):
      """
      <style>
      div[data-testid="stDialog"] > div {
-         width: 100vw !important;
+         width: 140vw !important;
          max-width: 1400px !important;
      }
      </style>

@@ -39,6 +39,7 @@ st.markdown("""
 <style>
 .detail-box {
     background-color: #f2f2f2;
+    color : cyan;
     padding: 1rem 1.2rem;
     border-radius: 6px;
     margin-top: 0.5rem;
@@ -49,6 +50,7 @@ st.markdown("""
 .detail-box-title {
     font-weight: 600;
     margin-bottom: 0.2rem;
+    color : cyan;
 }
 
 .detail-box-subtitle {

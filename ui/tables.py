@@ -201,21 +201,21 @@ def voir_detail_chapitre(df, budget, section, sens, chapitre):
     c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 = st.columns(10)
     
     with c1:
-            badge("",f"Total Prévu {total_vals['Total_Prévu']:,.2f} €", "green")
+            badge("",f"Budget {total_vals['Total_Prévu']:,.2f} €", "green")
     with c2:
             badge("",f"Réalisé {total_vals['Réalisé']:,.2f} €", "#045211")
     with c3:
-            badge("", f"Reste Engagé {total_vals['Reste_engagé']:,.2f} €", "red")
+            badge("", f"Reste {total_vals['Reste_engagé']:,.2f} €", "red")
     with c4:
-            badge("",f"Liquidé N-1 {total_vals['Liquidé_N_1']:,.2f} €", "blue")
+            badge("",f"N-1 {total_vals['Liquidé_N_1']:,.2f} €", "blue")
     with c5:
-            badge("",f"Liquidé N-2 {total_vals['Liquidé_N_2']:,.2f} €", "blue")
+            badge("",f"N-2 {total_vals['Liquidé_N_2']:,.2f} €", "blue")
     with c6:
-            badge("",f"Liquidé N-3 {total_vals['Liquidé_N_3']:,.2f} €", "blue")
+            badge("",f"N-3 {total_vals['Liquidé_N_3']:,.2f} €", "blue")
     with c7:
-            badge("",f"Liquidé N-4 {total_vals['Liquidé_N_4']:,.2f} €", "blue")
+            badge("",f"N-4 {total_vals['Liquidé_N_4']:,.2f} €", "blue")
     with c8:
-            badge("",f"Liquidé N-5 {total_vals['Liquidé_N_5']:,.2f} €", "blue")   
+            badge("",f"N-5 {total_vals['Liquidé_N_5']:,.2f} €", "blue")   
 
     # Graphique répartition
     st.markdown("---")

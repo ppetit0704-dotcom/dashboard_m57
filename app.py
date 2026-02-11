@@ -158,7 +158,7 @@ df_tableau = tableau_chapitres(
     sens=sens
 )
 
-st.dataframe(df_tableau, use_container_width=True)
+#st.dataframe(df_tableau, use_container_width=True)
 
 
 st.divider()

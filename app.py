@@ -32,7 +32,7 @@ from core.calculs import calculer_sommes_par_chapitre, calcul_autofinancement
 
 from ui.sidebar import filtres
 from ui.cards import afficher_indicateurs, badge, badgeRed, badgeGreen, badgeBlue
-from ui.tables import tableau_chapitres
+from ui.tables import tableau_chapitres,voir_detail_chapitre
 from ui.graphs import camembert
 
 
@@ -70,35 +70,9 @@ with st.sidebar:
             type="csv"
         )
 
-        st.markdown("---")
+     
 
-        st.caption(
-            "Pour afficher le détail des écritures par compte, "
-            "chargez le fichier 'Edition_du_grand_livre.CSV'"
-        )
 
-        if "df_grand_livre" not in st.session_state:
-            st.session_state.df_grand_livre = None
-
-        file_gl = st.file_uploader(
-            "📝 Grand Livre (optionnel)",
-            type="csv",
-            key="grand_livre_uploader"
-        )
-
-# =====================================================
-# CHARGEMENT GRAND LIVRE
-# =====================================================
-
-if file_gl and st.session_state.df_grand_livre is None:
-    with st.spinner("Chargement du grand livre..."):
-        st.session_state.df_grand_livre = load_grand_livre(file_gl)
-
-        if st.session_state.df_grand_livre is not None:
-            st.success(
-                f"✅ Grand livre chargé : "
-                f"{len(st.session_state.df_grand_livre)} écritures"
-            )
 
 # =====================================================
 # SI PAS DE FICHIER → STOP
@@ -131,6 +105,7 @@ df_filtre = df[
     (df["Section"] == section) &
     (df["Sens"] == sens)
 ]
+#st.write(df_filtre)
 
 # =====================================================
 # CALCULS
@@ -174,14 +149,17 @@ st.divider()
 # TABLEAU
 # =====================================================
 
-tableau_chapitres(
-    df_filtre,
-    annees,
-    budget,
-    section,
-    sens,
-    st.session_state.df_grand_livre
+df_tableau = tableau_chapitres(df, budget, section, sens)
+#st.write(df)
+df_tableau = tableau_chapitres(
+    df,
+    budget=budget,
+    section=section,
+    sens=sens
 )
+
+st.dataframe(df_tableau, use_container_width=True)
+
 
 st.divider()
 

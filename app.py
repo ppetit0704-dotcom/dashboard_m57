@@ -149,17 +149,12 @@ st.divider()
 # TABLEAU
 # =====================================================
 
-df_tableau = tableau_chapitres(df, budget, section, sens)
-#st.write(df)
 df_tableau = tableau_chapitres(
     df,
     budget=budget,
     section=section,
     sens=sens
 )
-
-#st.dataframe(df_tableau, use_container_width=True)
-
 
 st.divider()
 

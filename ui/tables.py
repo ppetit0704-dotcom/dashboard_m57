@@ -14,7 +14,8 @@ Module tables.py
 import streamlit as st
 import pandas as pd
 from ui.graphs import camembert_detail
-from core.loader_grand_livre import get_ecritures_compte
+from ui.cards import badge
+
 
 # --- FONCTION UTILE POUR SOMME SÉCURISÉE ---
 def safe_sum(df, col):
@@ -149,7 +150,17 @@ def voir_detail_chapitre(df, budget, section, sens, chapitre):
     """
 
     # Colonnes de base
-    cols_base = ["Compte", "Total_Prévu", "Réalisé", "Reste_engagé"]
+    cols_base = [
+        "Compte",
+        "Total_Prévu",
+        "Réalisé",
+        "Reste_engagé",
+        "Liquidé_N_1",
+        "Liquidé_N_2",
+        "Liquidé_N_3",
+        "Liquidé_N_4",
+        "Liquidé_N_5"
+    ]
 
     # Filtrer le chapitre
     df_detail = df[
@@ -165,25 +176,46 @@ def voir_detail_chapitre(df, budget, section, sens, chapitre):
 
     # Conversion en numérique pour les calculs
     for col in cols_base[1:]:
-        df_detail[col] = pd.to_numeric(df_detail[col], errors="coerce").fillna(0)
+        df_detail[col] = pd.to_numeric(
+            df_detail[col], errors="coerce"
+        ).fillna(0)
 
     # Affichage titre
-    st.subheader(f"Détails du Chapitre {chapitre} ({budget} / {section} / {sens})")
+    st.subheader(
+        f"Détails du Chapitre {chapitre} ({budget} / {section} / {sens})"
+    )
 
     # Affichage tableau avec formatage
     df_affiche = df_detail.copy()
     for col in cols_base[1:]:
-        df_affiche[col] = df_affiche[col].map(lambda x: f"{x:,.2f} €".replace(",", " "))
+        df_affiche[col] = df_affiche[col].map(
+            lambda x: f"{x:,.2f} €".replace(",", " ")
+        )
 
     st.dataframe(df_affiche, use_container_width=True, hide_index=True)
 
     # Totaux
     total_vals = df_detail[cols_base[1:]].sum()
-    st.markdown(
-        f"**TOTAL : Total Prévu = {total_vals['Total_Prévu']:,.2f} €, "
-        f"Réalisé = {total_vals['Réalisé']:,.2f} €, "
-        f"Reste Engagé = {total_vals['Reste_engagé']:,.2f} €**".replace(",", " ")
-    )
+
+    
+    c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 = st.columns(10)
+    
+    with c1:
+            badge("",f"Total Prévu {total_vals['Total_Prévu']:,.2f} €", "green")
+    with c2:
+            badge("",f"Réalisé {total_vals['Réalisé']:,.2f} €", "#045211")
+    with c3:
+            badge("", f"Reste Engagé {total_vals['Reste_engagé']:,.2f} €", "red")
+    with c4:
+            badge("",f"Liquidé N-1 {total_vals['Liquidé_N_1']:,.2f} €", "blue")
+    with c5:
+            badge("",f"Liquidé N-2 {total_vals['Liquidé_N_2']:,.2f} €", "blue")
+    with c6:
+            badge("",f"Liquidé N-3 {total_vals['Liquidé_N_3']:,.2f} €", "blue")
+    with c7:
+            badge("",f"Liquidé N-4 {total_vals['Liquidé_N_4']:,.2f} €", "blue")
+    with c8:
+            badge("",f"Liquidé N-5 {total_vals['Liquidé_N_5']:,.2f} €", "blue")   
 
     # Graphique répartition
     st.markdown("---")

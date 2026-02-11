@@ -133,11 +133,14 @@ def tableau_chapitres(df, budget, section=None, sens=None):
                 voir_detail_chapitre(df, budget, section, sens, row["Chapitre"])
         else:
             # Ligne TOTAL
-            st.markdown(
-                f"**TOTAL : " +
-                " | ".join([f"{row[col]}" for col in cols_base]) +
-                "**"
-            )
+            st.markdown("### TOTAL")
+
+            cols = st.columns(len(cols_base))
+            
+            for i, col in enumerate(cols_base):
+                with cols[i]:
+                    badge(col, row[col])
+
     return tableau_style
 
 

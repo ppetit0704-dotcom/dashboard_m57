@@ -30,7 +30,7 @@ def badge(label, value, color="green"):
             text-align:center;
             font-size:16px;
             font-weight:600;">
-            <div style="font-size:16px; color:#555;">{label}</div>
+            <div style="font-size:16px; color:"white";">{label}</div>
             <div>{value}</div>
         </div>
         """,
@@ -87,6 +87,7 @@ def badgeBlue(label, value, color="blue"):
         """,
         unsafe_allow_html=True
     )
+
 
 
 

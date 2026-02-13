@@ -105,6 +105,7 @@ df_filtre = df[
     (df["Section"] == section) &
     (df["Sens"] == sens)
 ]
+
 #st.write(df_filtre)
 
 # =====================================================
@@ -149,12 +150,14 @@ st.divider()
 # TABLEAU
 # =====================================================
 
+# Appel unique de la fonction tableau_chapitres
 df_tableau = tableau_chapitres(
     df,
     budget=budget,
     section=section,
     sens=sens
 )
+
 
 st.divider()
 

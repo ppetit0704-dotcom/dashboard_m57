@@ -14,7 +14,7 @@ Module tables.py
 import streamlit as st
 import pandas as pd
 from ui.graphs import camembert_detail
-from ui.cards import badge
+from ui.cards import badge,badgeGreen,badgeRed, badgeBlue
 
 
 # --- FONCTION UTILE POUR SOMME SÉCURISÉE ---
@@ -204,22 +204,56 @@ def voir_detail_chapitre(df, budget, section, sens, chapitre):
     c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 = st.columns(10)
     
     with c1:
-            badge("",f"Budget={total_vals['Total_Prévu']:,.2f} €","green")
+            badgeGreen("",f"Total Prévu {total_vals['Total_Prévu']:,.2f} €")
     with c2:
-            badge("",f"Réalisé={total_vals['Réalisé']:,.2f} €", "#045211")
+            badge("",f"Réalisé {total_vals['Réalisé']:,.2f} €", "#045211")
     with c3:
-            badge("", f"Reste={total_vals['Reste_engagé']:,.2f} €","red")
+            badgeRed("", f"Reste Engagé {total_vals['Reste_engagé']:,.2f} €")
     with c4:
-            badge("",f"N-1={total_vals['Liquidé_N_1']:,.2f} €", "blue")
+            badgeBlue("",f"Liquidé N-1 {total_vals['Liquidé_N_1']:,.2f} €")
     with c5:
-            badge("",f"N-2={total_vals['Liquidé_N_2']:,.2f} €", "blue")
+            badgeBlue("",f"Liquidé N-2 {total_vals['Liquidé_N_2']:,.2f} €")
     with c6:
-            badge("",f"N-3={total_vals['Liquidé_N_3']:,.2f} €", "blue")
+            badgeBlue("",f"Liquidé N-3 {total_vals['Liquidé_N_3']:,.2f} €")
     with c7:
-            badge("",f"N-4={total_vals['Liquidé_N_4']:,.2f} €", "blue")
+            badgeBlue("",f"Liquidé N-4 {total_vals['Liquidé_N_4']:,.2f} €")
     with c8:
-            badge("",f"N-5={total_vals['Liquidé_N_5']:,.2f} €", "blue")   
+            badgeBlue("",f"Liquidé N-5 {total_vals['Liquidé_N_5']:,.2f} €")   
 
+    st.markdown("### 📈 Évolution des réalisations")
+
+    # Création des données
+    data_evolution = pd.DataFrame({
+        "Année": ["N","N-1", "N-2", "N-3", "N-4", "N-5"],
+        "Montant": [
+            total_vals.get("Réalisé", 0),
+            total_vals.get("Liquidé_N_1", 0),
+            total_vals.get("Liquidé_N_2", 0),
+            total_vals.get("Liquidé_N_3", 0),
+            total_vals.get("Liquidé_N_4", 0),
+            total_vals.get("Liquidé_N_5", 0),
+        ]
+    }) 
+        
+    import altair as alt
+
+    chart = alt.Chart(data_evolution).mark_line(point=True).encode(
+        x="Année",
+        y=alt.Y("Montant", title="Montant (€)"),
+        tooltip=["Année", "Montant"]
+    ).properties(
+        height=350
+    )
+    delta = total_vals["Réalisé"] - total_vals["Liquidé_N_1"]
+
+    st.metric(
+        label="Évolution N vs N-1",
+        value=f"{total_vals['Réalisé']:,.2f} €",
+        delta=f"{delta:,.2f} €"
+)
+    
+    st.altair_chart(chart, use_container_width=True)
+    
     # Graphique répartition
     st.markdown("---")
     st.subheader(f"📊 Répartition des comptes du chapitre {chapitre}")

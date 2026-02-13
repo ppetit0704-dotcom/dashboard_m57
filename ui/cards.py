@@ -20,7 +20,7 @@ def afficher_indicateurs(total_budget, total_realise, reste_engage, ratio, taux)
             """, unsafe_allow_html=True
         )
 
-def badge(label, value, color="#FB9223"):
+def badge(label, value, color):
     st.markdown(
         f"""
         <div style="
@@ -87,3 +87,4 @@ def badgeBlue(label, value, color="blue"):
         """,
         unsafe_allow_html=True
     )
+

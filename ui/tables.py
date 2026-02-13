@@ -204,11 +204,11 @@ def voir_detail_chapitre(df, budget, section, sens, chapitre):
     c1, c2, c3, c4, c5, c6, c7, c8, c9, c10 = st.columns(10)
     
     with c1:
-            badge("",f"Budget={total_vals['Total_Prévu']:,.2f} €", "green")
+            badgeGreen("",f"Budget={total_vals['Total_Prévu']:,.2f} €")
     with c2:
             badge("",f"Réalisé={total_vals['Réalisé']:,.2f} €", "#045211")
     with c3:
-            badge("", f"Reste={total_vals['Reste_engagé']:,.2f} €", "red")
+            badgeRed("", f"Reste={total_vals['Reste_engagé']:,.2f} €")
     with c4:
             badge("",f"N-1={total_vals['Liquidé_N_1']:,.2f} €", "blue")
     with c5:

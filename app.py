@@ -51,7 +51,7 @@ st.image(str(logo_path), width=480)
 
 st.title("📊 Tableau de bord comptable – M57")
 st.caption(
-    "Version 2.00.01 Stable | Tableau de bord comptable [M57] | Auteur : P. PETIT | 06/02/2026"
+    "Version 2.00.02 Stable | Tableau de bord comptable [M57] | Auteur : P. PETIT | 06/02/2026"
 )
 
 # =====================================================

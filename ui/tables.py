@@ -16,6 +16,25 @@ import pandas as pd
 from ui.graphs import camembert_detail
 from ui.cards import badge,badgeGreen,badgeRed, badgeBlue
 
+#Affichage entete
+def affiche_entete_chapitres(cols_base):
+    """
+    Affiche l'entête des colonnes pour le tableau des chapitres.
+    """
+    cols = st.columns([2] + [2]*len(cols_base) + [1])
+
+    cols[0].markdown(
+        "<span style='color:#00BCD4; font-weight:700'>Chapitre</span>",
+        unsafe_allow_html=True
+    )
+
+    for i, col in enumerate(cols_base, start=1):
+        cols[i].markdown(
+            f"<span style='color:#00BCD4; font-weight:700'>{col}</span>",
+            unsafe_allow_html=True
+        )
+
+
 
 # --- FONCTION UTILE POUR SOMME SÉCURISÉE ---
 def safe_sum(df, col):
@@ -122,6 +141,9 @@ def tableau_chapitres(df, budget, section=None, sens=None):
     st.subheader(f"📋 Tableau des Chapitres ({budget})")
 
     for idx, row in tableau_style.iterrows():
+        
+        # Affichage de l'entête
+        affiche_entete_chapitres(cols_base)
         if row["Chapitre"] != "TOTAL":
             cols_display = st.columns([2] + [2]*len(cols_base) + [1])
             cols_display[0].write(row["Chapitre"])

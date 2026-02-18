@@ -1,6 +1,6 @@
 """
 @author : P. PETIT
-@version : 2.0.1
+@version : 2.0.2
 @Description : Tableau de bord comptable (import de fichier csv formaté)
 @format : Entete CSV:  [
     'Sens', 'Section', 'Chapitre', 'Libellé_budget', 'Compte',
@@ -120,10 +120,10 @@ sommes, report_a_nouveau,report_a_nouveau_invest = calculer_sommes_par_chapitre(
 total_budget = df_filtre["Total_Prévu"].sum()
 
 if section == "F" and sens == "R":
-    total_realise = df_filtre["Réalisé"].sum() - report_a_nouveau
+    total_realise = df_filtre["Réalisé"].sum() - report_a_nouveau 
 else:
     if section == "I" and sens == "R":
-        total_realise = df_filtre["Réalisé"].sum() - report_a_nouveau_invest
+        total_realise = df_filtre["Réalisé"].sum() - report_a_nouveau_invest 
     else:
         total_realise = df_filtre["Réalisé"].sum()
 

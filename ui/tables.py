@@ -163,7 +163,19 @@ def tableau_chapitres(df, budget, section=None, sens=None):
                 )
 
         else:
-            st.markdown("### TOTAL")
+            st.markdown("### TOTAUX")
+            if sens == "R" and section == "F":
+                st.markdown(
+                    "<span style='color:cyan;font-size:16px;text-decoration: overline;'> Le réalisé comprend le résultat de fonctionnement reporté </span>",
+                    unsafe_allow_html=True
+                )
+            
+            if sens == "R" and section == "I":
+                st.markdown(
+                    "<span style='color:cyan;font-size:16px;text-decoration: overline;'> Le réalisé comprend le solde d'exécution de la section d'investissement reporté </span>",
+                    unsafe_allow_html=True
+                )
+
 
             cols = st.columns(len(cols_base))
             for i, col in enumerate(cols_base):

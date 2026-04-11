@@ -1,5 +1,5 @@
 """
-@author : P. PETIT
+@author : Philippe. PETIT
 @version : 2.0.2
 @Description : Tableau de bord comptable (import de fichier csv formaté)
 @format : Entete CSV:  [
@@ -51,7 +51,7 @@ st.image(str(logo_path), width=480)
 
 st.title("📊 Tableau de bord comptable – M57")
 st.caption(
-    "Version 2.00.02 Stable | Tableau de bord comptable [M57] | Auteur : P. PETIT | 06/02/2026"
+    "Version 2.00.02 Stable | Tableau de bord comptable [M57] | Auteur : Philippe PETIT | 06/02/2026"
 )
 
 # =====================================================
